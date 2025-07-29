@@ -1,54 +1,50 @@
 @section('title', __('Dashboard'))
-<x-layouts.app :title="__('Dashboard')">
+<x-layouts.app :title="__('Dashboard')">    
+  <div class="container-fluid">
+
     <div class="row g-4">
-        <!-- Statistiques principales -->
-        <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <div class="card-body d-flex align-items-center justify-content-between text-white">
+        <!-- Statistiques principales avec nouvelles couleurs -->
+        <div class="col-lg-3">
+            <div class="card card-mini text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+                <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h6 class="card-subtitle mb-2 text-white-50">Patients inscrits</h6>
-                        <h2 class="card-title mb-0 fw-bold">{{ number_format($totalPatients ?? 1247) }}</h2>
-                        <small class="text-white-50">
-                            <i class="fas fa-arrow-up me-1"></i>+12% ce mois
-                        </small>
+                        <h6 class="mb-1 text-white-50">Patients inscrits</h6>
+                        <h4 class="card-title fw-bold">{{ number_format($totalPatients ?? 1247) }}</h4>
                     </div>
-                    <div class="text-white" style="font-size: 3rem; opacity: 0.3;">
-                        <i class="fas fa-users"></i>
-                    </div>
+                    <div><i class="bx bx-group icon-stat"></i></div>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                <div class="card-body d-flex align-items-center justify-content-between text-white">
+        <div class="col-lg-3">
+            <div class="card card-mini text-white" style="background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)">
+                <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h6 class="card-subtitle mb-2 text-white-50">Professionnels actifs</h6>
-                        <h2 class="card-title mb-0 fw-bold">{{ number_format($totalDoctors ?? 89) }}</h2>
-                        <small class="text-white-50">
-                            <i class="fas fa-arrow-up me-1"></i>+5% ce mois
-                        </small>
+                        <h6 class="mb-1 text-white-50">Consultations</h6>
+                        <h4 class="card-title fw-bold">{{ number_format($totalConsultations ?? 563) }}</h4>
                     </div>
-                    <div class="text-white" style="font-size: 3rem; opacity: 0.3;">
-                        <i class="fas fa-user-md"></i>
-                    </div>
+                    <div><i class="bx bx-stethoscope icon-stat"></i></div>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-4">
-            <div class="card border-0 shadow-sm h-100" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                <div class="card-body d-flex align-items-center justify-content-between text-white">
+        <div class="col-lg-3">
+            <div class="card card-mini text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)">
+                <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
-                        <h6 class="card-subtitle mb-2 text-white-50">Rendez-vous aujourd'hui</h6>
-                        <h2 class="card-title mb-0 fw-bold">{{ number_format($todayAppointments ?? 156) }}</h2>
-                        <small class="text-white-50">
-                            <i class="fas fa-calendar-check me-1"></i>{{ number_format($pendingAppointments ?? 23) }} en attente
-                        </small>
+                        <h6 class="mb-1 text-white-50">Examens médicaux</h6>
+                        <h4 class="card-title fw-bold">{{ number_format($totalExamens ?? 890) }}</h4>
                     </div>
-                    <div class="text-white" style="font-size: 3rem; opacity: 0.3;">
-                        <i class="fas fa-calendar-alt"></i>
+                    <div><i class="bx bx-test-tube icon-stat"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-mini text-white" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%)">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="mb-1 text-white-50">Ordonnances</h6>
+                        <h4 class="card-title fw-bold">{{ number_format($totalOrdonnances ?? 347) }}</h4>
                     </div>
+                    <div><i class="bx bx-receipt icon-stat"></i></div>
                 </div>
             </div>
         </div>
@@ -58,7 +54,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-0 pb-0">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                        <i class="bx bx-map text-primary me-2"></i>
                         Répartition par région
                     </h5>
                 </div>
@@ -68,7 +64,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-city text-white"></i>
+                                        <i class="bx bx-buildings text-white"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -81,7 +77,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-building text-white"></i>
+                                        <i class="bx bx-building text-white"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -94,7 +90,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-tree text-white"></i>
+                                        <i class="bx bx-home text-white"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -107,7 +103,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="bg-info rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                        <i class="fas fa-mountain text-white"></i>
+                                        <i class="bx bx-landscape text-white"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -126,7 +122,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-0 pb-0">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-stethoscope text-success me-2"></i>
+                        <i class="bx bx-heart text-success me-2"></i>
                         Spécialités populaires
                     </h5>
                 </div>
@@ -134,9 +130,9 @@
                     <div class="row g-3">
                         @php
                         $specialties = [
-                            ['name' => 'Médecine générale', 'count' => 345, 'icon' => 'user-md', 'color' => 'primary'],
-                            ['name' => 'Pédiatrie', 'count' => 189, 'icon' => 'baby', 'color' => 'success'],
-                            ['name' => 'Gynécologie', 'count' => 156, 'icon' => 'female', 'color' => 'warning'],
+                            ['name' => 'Médecine générale', 'count' => 345, 'icon' => 'user-circle', 'color' => 'primary'],
+                            ['name' => 'Pédiatrie', 'count' => 189, 'icon' => 'child', 'color' => 'success'],
+                            ['name' => 'Gynécologie', 'count' => 156, 'icon' => 'female-sign', 'color' => 'warning'],
                             ['name' => 'Sage-femme', 'count' => 134, 'icon' => 'heart', 'color' => 'info'],
                         ];
                         @endphp
@@ -146,7 +142,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0">
                                     <div class="bg-{{ $specialty['color'] }} rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
-                                        <i class="fas fa-{{ $specialty['icon'] }} text-white" style="font-size: 0.8rem;"></i>
+                                        <i class="bx bx-{{ $specialty['icon'] }} text-white" style="font-size: 0.8rem;"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
@@ -166,12 +162,12 @@
             </div>
         </div>
 
-        <!-- Graphique des rendez-vous et notifications récentes -->
+        <!-- Graphique des rendez-vous -->
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-chart-line text-info me-2"></i>
+                        <i class="bx bx-line-chart text-info me-2"></i>
                         Évolution des rendez-vous
                     </h5>
                     <div class="btn-group" role="group">
@@ -192,7 +188,7 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-0 pb-0">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-bell text-warning me-2"></i>
+                        <i class="bx bx-bell text-warning me-2"></i>
                         Activités récentes
                     </h5>
                 </div>
@@ -240,7 +236,7 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-transparent border-0">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-exclamation-triangle text-danger me-2"></i>
+                        <i class="bx bx-error text-danger me-2"></i>
                         Alertes système
                     </h5>
                 </div>
@@ -249,7 +245,7 @@
                         <div class="col-lg-3">
                             <div class="alert alert-warning border-0 shadow-sm">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-wifi text-warning me-2"></i>
+                                    <i class="bx bx-wifi text-warning me-2"></i>
                                     <div>
                                         <h6 class="alert-heading mb-1">Connectivité</h6>
                                         <p class="mb-0 small">12% d'utilisateurs en mode hors-ligne</p>
@@ -260,7 +256,7 @@
                         <div class="col-lg-3">
                             <div class="alert alert-info border-0 shadow-sm">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-sms text-info me-2"></i>
+                                    <i class="bx bx-message-dots text-info me-2"></i>
                                     <div>
                                         <h6 class="alert-heading mb-1">SMS</h6>
                                         <p class="mb-0 small">89% de taux de livraison SMS</p>
@@ -271,7 +267,7 @@
                         <div class="col-lg-3">
                             <div class="alert alert-success border-0 shadow-sm">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-mobile-alt text-success me-2"></i>
+                                    <i class="bx bx-mobile text-success me-2"></i>
                                     <div>
                                         <h6 class="alert-heading mb-1">Orange Money</h6>
                                         <p class="mb-0 small">156 paiements traités</p>
@@ -282,7 +278,7 @@
                         <div class="col-lg-3">
                             <div class="alert alert-primary border-0 shadow-sm">
                                 <div class="d-flex align-items-center">
-                                    <i class="fas fa-language text-primary me-2"></i>
+                                    <i class="bx bx-world text-primary me-2"></i>
                                     <div>
                                         <h6 class="alert-heading mb-1">Langues</h6>
                                         <p class="mb-0 small">67% FR, 23% Dioula, 10% Baoulé</p>
@@ -298,6 +294,15 @@
 
     <!-- Styles CSS personnalisés -->
     <style>
+        .icon-stat {
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+        
+        .card-mini {
+            min-height: 120px;
+        }
+        
         .timeline {
             position: relative;
             padding-left: 30px;
@@ -379,8 +384,8 @@
                     }, {
                         label: 'Nouveaux patients',
                         data: [28, 35, 40, 45, 30, 25, 20],
-                        border: '#f093fb',
-                        backgroundColor: 'rgba(240, 147, 251, 0.1)',
+                        border: '#11998e',
+                        backgroundColor: 'rgba(17, 153, 142, 0.1)',
                         tension: 0.4,
                         fill: true
                     }]
@@ -414,4 +419,5 @@
             });
         });
     </script>
+  </div>
 </x-layouts.app>

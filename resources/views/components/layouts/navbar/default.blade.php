@@ -157,17 +157,6 @@
               <span>Mon profil</span>
             </a>
 
-            <a class="dropdown-item menu-item {{ request()->routeIs('settings.password') ? 'active' : '' }}" 
-               href="{{ route('settings.password') }}" wire:navigate>
-              <i class="bx bx-cog menu-icon"></i>
-              <span>Paramètres</span>
-            </a>
-
-            <a class="dropdown-item menu-item" href="#">
-              <i class="bx bx-help-circle menu-icon"></i>
-              <span>Centre d'aide</span>
-            </a>
-
             <div class="dropdown-divider"></div>
 
             <!-- System Status in User Menu -->
