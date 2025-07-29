@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3 mb-0">Liste des Patients</h1>
                 <a href="{{ route('patients.create') }}" class="btn btn-primary">
-                    <i class="fas fa-plus me-2"></i>Nouveau Patient
+                    <i class="bx bx-plus me-2"></i>Nouveau Patient
                 </a>
             </div>
 
@@ -52,10 +52,10 @@
                         
                         <div class="col-md-2 d-flex align-items-end">
                             <button type="submit" class="btn btn-outline-primary me-2">
-                                <i class="fas fa-search"></i> Filtrer
+                                <i class="bx bx-search"></i> Filtrer
                             </button>
                             <a href="{{ route('patients.index') }}" class="btn btn-outline-secondary">
-                                <i class="fas fa-times"></i>
+                                <i class="bx bx-x"></i>
                             </a>
                         </div>
                     </form>
@@ -130,18 +130,18 @@
                                                     <a href="{{ route('patients.show', $patient) }}" 
                                                        class="btn btn-sm btn-outline-primary" 
                                                        title="Voir détails">
-                                                        <i class="fas fa-eye"></i>
+                                                        <i class="bx bx-show"></i>
                                                     </a>
                                                     <a href="{{ route('patients.edit', $patient) }}" 
                                                        class="btn btn-sm btn-outline-warning" 
                                                        title="Modifier">
-                                                        <i class="fas fa-edit"></i>
+                                                        <i class="bx bx-edit"></i>
                                                     </a>
                                                     <button type="button" 
                                                             class="btn btn-sm btn-outline-danger" 
                                                             title="Supprimer"
                                                             onclick="confirmDelete({{ $patient->id }})">
-                                                        <i class="fas fa-trash"></i>
+                                                        <i class="bx bx-trash"></i>
                                                     </button>
                                                 </div>
                                             </td>
@@ -161,7 +161,7 @@
                         </div>
                     @else
                         <div class="text-center py-5">
-                            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                            <i class="bx bx-group bx-lg text-muted mb-3" style="font-size: 3rem;"></i>
                             <h5>Aucun patient trouvé</h5>
                             <p class="text-muted">
                                 @if(request()->hasAny(['search', 'region', 'status']))
@@ -171,7 +171,7 @@
                                 @endif
                             </p>
                             <a href="{{ route('patients.create') }}" class="btn btn-primary">
-                                <i class="fas fa-plus me-2"></i>Ajouter un Patient
+                                <i class="bx bx-plus me-2"></i>Ajouter un Patient
                             </a>
                         </div>
                     @endif
@@ -186,18 +186,30 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Confirmer la suppression</h5>
+                <h5 class="modal-title">
+                    <i class="bx bx-error-circle text-danger me-2"></i>
+                    Confirmer la suppression
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                Êtes-vous sûr de vouloir supprimer ce patient ? Cette action peut être annulée.
+                <div class="d-flex align-items-center">
+                    <i class="bx bx-info-circle text-warning me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                        Êtes-vous sûr de vouloir supprimer ce patient ? Cette action peut être annulée.
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bx bx-x me-1"></i>Annuler
+                </button>
                 <form id="deleteForm" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bx bx-trash me-1"></i>Supprimer
+                    </button>
                 </form>
             </div>
         </div>
@@ -220,6 +232,15 @@
 
 .table-hover tbody tr:hover {
     background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Style pour les icônes Boxicons */
+.bx {
+    font-size: 1rem;
+}
+
+.bx-lg {
+    font-size: 1.5rem;
 }
 </style>
 
