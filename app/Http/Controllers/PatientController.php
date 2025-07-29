@@ -34,8 +34,8 @@ class PatientController extends Controller
         }
 
         $patients = $query->orderBy('created_at', 'desc')
-                         ->paginate(15)
-                         ->withQueryString();
+            ->paginate(15)
+            ->withQueryString();
 
         // Récupérer les régions pour le filtre
         $regions = Patient::distinct()->pluck('region')->filter()->sort();
@@ -50,13 +50,13 @@ class PatientController extends Controller
     {
         // Si vous avez un système d'authentification patient séparé
         // $patient = auth('patient')->user();
-        
+
         // Pour l'instant, on peut simuler ou récupérer les données autrement
         // Vous devrez adapter selon votre logique d'authentification
-        
+
         // Exemple avec un patient fictif ou le premier patient
         $patient = Patient::first(); // À remplacer par votre logique
-        
+
 
         // Charger les données nécessaires pour le dashboard
         $appointments = collect([
@@ -132,7 +132,7 @@ class PatientController extends Controller
     public function show(Patient $patient)
     {
         // Charger les relations avec les rendez-vous récents
-        $patient->load(['appointments' => function($query) {
+        $patient->load(['appointments' => function ($query) {
             $query->orderBy('appointment_date', 'desc')->limit(5);
         }]);
 
@@ -174,7 +174,7 @@ class PatientController extends Controller
         $patient = Patient::create($validatedData);
 
         return redirect()->route('patients.detail', $patient)
-                        ->with('success', 'Patient créé avec succès.');
+            ->with('success', 'Patient créé avec succès.');
     }
 
     /**
@@ -212,7 +212,7 @@ class PatientController extends Controller
         $patient->update($validatedData);
 
         return redirect()->route('patients.detail', $patient)
-                        ->with('success', 'Patient mis à jour avec succès.');
+            ->with('success', 'Patient mis à jour avec succès.');
     }
 
     /**
@@ -223,7 +223,7 @@ class PatientController extends Controller
         $patient->delete();
 
         return redirect()->route('patients.index')
-                        ->with('success', 'Patient supprimé avec succès.');
+            ->with('success', 'Patient supprimé avec succès.');
     }
 
     /**
@@ -238,8 +238,8 @@ class PatientController extends Controller
         }
 
         $patients = $query->active()
-                         ->limit(10)
-                         ->get(['id', 'first_name', 'last_name', 'email']);
+            ->limit(10)
+            ->get(['id', 'first_name', 'last_name', 'email']);
 
         return response()->json($patients);
     }

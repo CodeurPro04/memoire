@@ -1,19 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\EstablishmentController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\CommunicationController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\SupportController;
-use App\Http\Controllers\PatientController;
-
 use Livewire\Volt\Volt;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SupportController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CommunicationController;
+use App\Http\Controllers\EstablishmentController;
 
 // =====================================
 // ROUTES PUBLIQUES
@@ -34,18 +34,18 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('livewire.auth.login');
     })->middleware('guest')->name('login');
-        
+
     // Page d'inscription
     Route::get('/register', function () {
         return view('livewire.auth.register');
     })->middleware('guest')->name('register');
-        
+
     // Mot de passe oublié
     Volt::route('/forgot-password', 'livewire.auth.forgot-password')->name('password.request');
-    
+
     // Réinitialisation du mot de passe
     Volt::route('/reset-password/{token}', 'livewire.auth.reset-password')->name('password.reset');
-    
+
     // Vérification email
     Volt::route('/verify-email', 'livewire.auth.verify-email')->name('verification.notice');
 });
@@ -54,23 +54,23 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // Confirmation du mot de passe
     Volt::route('/confirm-password', 'auth.confirm-password')->name('password.confirm');
-    
+
     // Vérification email (GET pour le lien de vérification)
     Route::get('/verify-email/{id}/{hash}', function ($id, $hash) {
         return redirect()->route('verification.verify', ['id' => $id, 'hash' => $hash]);
     })->middleware(['signed', 'throttle:6,1'])->name('verification.link');
-    
+
     // Action de vérification d'email
     Volt::route('/email/verify/{id}/{hash}', 'auth.verify-email-action')
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
-        
+
     // Renvoyer l'email de vérification
     Route::post('/email/verification-notification', function () {
         request()->user()->sendEmailVerificationNotification();
         return back()->with('message', 'Verification link sent!');
     })->middleware('throttle:6,1')->name('verification.send');
-    
+
     // Déconnexion
     Route::post('/logout', function () {
         Auth::logout();
@@ -79,31 +79,31 @@ Route::middleware('auth')->group(function () {
         return redirect('/');
     })->name('logout');
 });
-    // Dashboard principal
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+// Dashboard principal
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-    Route::get('/docteurs', [DoctorController::class, 'index'])->name('index');
-    Route::get('/docteurs/create', function () {
-        return view('doctors.create');
-    })->name('doctors.create');
-    Route::get('/docteurs/{id}', function () {
-        return view('doctors.show');
-    })->name('doctors.show');
-    Route::get('/docteurs/{id}/edit', function () {
-        return view('docteurs.edit');
-    })->name('docteurs.edit');
-    
-    Route::get('/chat', function () {
-        return view('chat');
-    })->name('chat');
-    Route::get('/espace-patient', [PatientController::class, 'patientEspace'])->name('patients.espace');
+Route::get('/docteurs', [DoctorController::class, 'index'])->name('index');
+Route::get('/docteurs/create', function () {
+    return view('doctors.create');
+})->name('doctors.create');
+Route::get('/docteurs/{id}', function () {
+    return view('doctors.show');
+})->name('doctors.show');
+Route::get('/docteurs/{id}/edit', function () {
+    return view('docteurs.edit');
+})->name('docteurs.edit');
 
-    // Dashboard principal
+Route::get('/chat', function () {
+    return view('chat');
+})->name('chat');
+Route::get('/espace-patient', [PatientController::class, 'patientEspace'])->name('patients.espace');
 
-    // Routes pour la gestion des patients (CRUD complet)
-    Route::resource('patients', PatientController::class);
+// Dashboard principal
+
+// Routes pour la gestion des patients (CRUD complet)
+Route::resource('patients', PatientController::class);
 
 
 // =====================================
@@ -111,7 +111,7 @@ Route::middleware('auth')->group(function () {
 // =====================================
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    
+
 
 
     // =====================================
@@ -228,15 +228,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('settings')->name('settings.')->group(function () {
         // Redirection par défaut vers le profil
         Route::redirect('/', 'settings/profile');
-        
+
         // Routes Volt pour Livewire
         Volt::route('/profile', 'settings.profile')->name('profile');
         Volt::route('/password', 'settings.password')->name('password');
-        
+
         // Route système (si vous avez un contrôleur dédié)
         Route::get('/system', [SettingsController::class, 'system'])->name('system');
         Route::post('/system/update', [SettingsController::class, 'updateSystem'])->name('system.update');
-        
+
         // Routes supplémentaires pour les paramètres
         Route::get('/notifications', [SettingsController::class, 'notifications'])->name('notifications');
         Route::post('/notifications/update', [SettingsController::class, 'updateNotifications'])->name('notifications.update');
@@ -252,20 +252,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // =====================================
     // ROUTES DE REDIRECTION POUR COMPATIBILITÉ
     // =====================================
-    
+
     // Redirections pour les anciennes URLs
     Route::get('/patient', function () {
         return redirect()->route('patients.index');
     });
-    
+
     Route::get('/patient/espace', function () {
         return redirect()->route('patients.espace');
     });
-        
+
     Route::get('/patient/create', function () {
         return redirect()->route('patients.create');
     });
-    
+
     Route::get('/patient/rdv', function () {
         return redirect()->route('patients.rdv');
     });
@@ -291,4 +291,3 @@ Route::prefix('api')->middleware(['auth:sanctum'])->group(function () {
     })->name('api.notifications.unread');
 });
 Auth::routes();
-
