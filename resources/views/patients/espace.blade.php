@@ -1,3 +1,4 @@
+<x-layouts.app>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -10,13 +11,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
         }
 
         .container {
@@ -371,14 +365,6 @@
         <div class="header">
             <div class="welcome-section">
                 <h1>Bienvenue, <span id="patientName">Jean Dupont</span></h1>
-                <p>Aujourd'hui, <span id="currentDate"></span></p>
-            </div>
-            <div class="user-info">
-                <div class="avatar" id="userAvatar">JD</div>
-                <div>
-                    <p style="font-weight: 600; color: #2d3748;">Jean Dupont</p>
-                    <p style="font-size: 14px; color: #718096;">Patient ID: #12345</p>
-                </div>
             </div>
         </div>
 
@@ -726,3 +712,4 @@
 </body>
 
 </html>
+</x-layouts.app>

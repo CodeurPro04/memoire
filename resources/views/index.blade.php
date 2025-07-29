@@ -1099,7 +1099,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="copyright-area-inner">
-                        <p>© 2025 Mediweb. All Rights Reserved by <a target="_blank"
+                        <p>© 2025 . Tous droits réservés. <a target="_blank"
                                 href="https://themeforest.net/user/themewant">ThemeWant</a></p>
                     </div>
                 </div>

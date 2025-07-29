@@ -83,7 +83,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/docteurs', [DoctorController::class, 'index'])->name('index');
+    Route::get('/docteurs/create', function () {
+        return view('doctors.create');
+    })->name('doctors.create');
+    Route::get('/docteurs/{id}', function () {
+        return view('doctors.show');
+    })->name('doctors.show');
+    Route::get('/docteurs/{id}/edit', function () {
+        return view('docteurs.edit');
+    })->name('docteurs.edit');
     
+    Route::get('/chat', function () {
+        return view('chat');
+    })->name('chat');
+    Route::get('/espace-patient', [PatientController::class, 'patientEspace'])->name('patients.espace');
+
     // Dashboard principal
 
     // Routes pour la gestion des patients (CRUD complet)
@@ -274,3 +290,6 @@ Route::prefix('api')->middleware(['auth:sanctum'])->group(function () {
         return response()->json(['count' => auth()->user()->unreadNotifications()->count()]);
     })->name('api.notifications.unread');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -44,6 +44,89 @@ class PatientController extends Controller
     }
 
     /**
+     * Afficher l'espace patient (dashboard patient)
+     */
+    public function patientEspace()
+    {
+        // Si vous avez un système d'authentification patient séparé
+        // $patient = auth('patient')->user();
+        
+        // Pour l'instant, on peut simuler ou récupérer les données autrement
+        // Vous devrez adapter selon votre logique d'authentification
+        
+        // Exemple avec un patient fictif ou le premier patient
+        $patient = Patient::first(); // À remplacer par votre logique
+        
+
+        // Charger les données nécessaires pour le dashboard
+        $appointments = collect([
+            [
+                'id' => 1,
+                'date' => '2025-07-28',
+                'time' => '10:00',
+                'doctor' => 'Dr. Martin',
+                'type' => 'Consultation générale',
+                'location' => 'Cabinet médical Centre-ville'
+            ],
+            [
+                'id' => 2,
+                'date' => '2025-08-05',
+                'time' => '14:30',
+                'doctor' => 'Dr. Dubois',
+                'type' => 'Suivi spécialisé',
+                'location' => 'Clinique Saint-Pierre'
+            ]
+        ]);
+
+        $recentResults = collect([
+            [
+                'id' => 1,
+                'type' => 'Analyse sanguine complète',
+                'date' => '2025-07-25',
+                'doctor' => 'Dr. Martin',
+                'status' => 'nouveau'
+            ],
+            [
+                'id' => 2,
+                'type' => 'Radiographie thoracique',
+                'date' => '2025-07-20',
+                'doctor' => 'Dr. Dubois',
+                'status' => 'normal'
+            ]
+        ]);
+
+        $messages = collect([
+            [
+                'id' => 1,
+                'from' => 'Dr. Martin',
+                'subject' => 'Réponse à votre question sur...',
+                'unread' => true
+            ],
+            [
+                'id' => 2,
+                'from' => 'Cabinet',
+                'subject' => 'Confirmation de rendez-vous',
+                'unread' => false
+            ]
+        ]);
+
+        $alerts = collect([
+            [
+                'type' => 'warning',
+                'title' => 'Nouveau résultat',
+                'message' => 'Analyse sanguine disponible'
+            ],
+            [
+                'type' => 'info',
+                'title' => 'Rappel RDV',
+                'message' => 'Rendez-vous dans 2 jours'
+            ]
+        ]);
+
+        return view('patients.espace', compact('patient', 'appointments', 'recentResults', 'messages', 'alerts'));
+    }
+
+    /**
      * Afficher les détails d'un patient
      */
     public function show(Patient $patient)
@@ -141,5 +224,23 @@ class PatientController extends Controller
 
         return redirect()->route('patients.index')
                         ->with('success', 'Patient supprimé avec succès.');
+    }
+
+    /**
+     * Recherche de patients (pour l'API)
+     */
+    public function search(Request $request)
+    {
+        $query = Patient::query();
+
+        if ($request->filled('q')) {
+            $query->search($request->q);
+        }
+
+        $patients = $query->active()
+                         ->limit(10)
+                         ->get(['id', 'first_name', 'last_name', 'email']);
+
+        return response()->json($patients);
     }
 }
