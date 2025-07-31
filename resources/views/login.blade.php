@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Formulaire de connexion</title>
     <style>
         /* Center the form container */
         body {
@@ -145,7 +145,7 @@
                     </path>
                 </g>
             </svg>
-            <input placeholder="Enter your Email" class="input" type="text">
+            <input placeholder="Saisir votre adresse email" class="input" type="text">
         </div>
 
         <div class="flex-column">
@@ -160,17 +160,17 @@
                     d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                 </path>
             </svg>
-            <input placeholder="Enter your Password" class="input" type="password">
+            <input placeholder="Saisir votre mot de passe" class="input" type="password">
         </div>
 
         <div class="flex-row">
             <div>
                 <input type="radio">
-                <label>Remember me </label>
+                <label>Se souvenir de moi </label>
             </div>
-            <span class="span">Forgot password?</span>
+            <span class="span">Mot de passe oublié ?</span>
         </div>
-        <button class="button-submit">Sign In</button>
+        <button class="button-submit">Se connecter</button>
         <p class="p">Vous n'avez pas de compte ? <span class="span">
                 <a href="#">
                     S'inscrire

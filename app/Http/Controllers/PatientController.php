@@ -173,7 +173,7 @@ class PatientController extends Controller
 
         $patient = Patient::create($validatedData);
 
-        return redirect()->route('patients.detail', $patient)
+        return redirect()->route('patients.index', $patient)
             ->with('success', 'Patient créé avec succès.');
     }
 
@@ -211,8 +211,8 @@ class PatientController extends Controller
 
         $patient->update($validatedData);
 
-        return redirect()->route('patients.detail', $patient)
-            ->with('success', 'Patient mis à jour avec succès.');
+        return redirect()->route('patients.index', $patient)
+            ->with('success', 'Informations du patient mises à jour avec succès.');
     }
 
     /**
