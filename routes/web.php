@@ -12,6 +12,8 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Auth\RegisterMedecinController;
+use App\Http\Controllers\Auth\RegisterPatientController;
 use App\Http\Controllers\CommunicationController;
 use App\Http\Controllers\EstablishmentController;
 
@@ -36,12 +38,22 @@ Route::middleware('guest')->group(function () {
     })->middleware('guest')->name('login');
 
     // Page d'inscription
-    Route::get('/register', function () {
-        return view('livewire.auth.register');
-    })->middleware('guest')->name('register');
+    Route::get('/registerm', function () {
+        return view('auth.register_medecin');
+    })->middleware('guest')->name('registerm');
+
+    Route::post('/registerm', [RegisterMedecinController::class, 'create'])->name('registerm.store');
+
+    // Page d'inscription patient
+    Route::get('/register-patient',function (){
+        return view('auth.register_patient');
+    })->name('register.patient');
+
+    Route::post('/register-patient', [RegisterPatientController::class, 'register'])
+        ->name('registerp');
 
     // Mot de passe oublié
-    Volt::route('/forgot-password', 'livewire.auth.forgot-password')->name('password.request');
+    Volt::route('/forgot-password', 'livewirgite.auth.forgot-password')->name('password.request');
 
     // Réinitialisation du mot de passe
     Volt::route('/reset-password/{token}', 'livewire.auth.reset-password')->name('password.reset');
