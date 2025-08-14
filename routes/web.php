@@ -45,7 +45,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/registerm', [RegisterMedecinController::class, 'create'])->name('registerm.store');
 
     // Page d'inscription patient
-    Route::get('/register-patient',function (){
+    Route::get('/register-patient', function () {
         return view('auth.register_patient');
     })->name('register.patient');
 
@@ -294,6 +294,7 @@ Route::prefix('webhooks')->name('webhooks.')->group(function () {
 // =====================================
 // ROUTES API (si nécessaire)
 // =====================================
+
 Route::prefix('api')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/patients/search', [PatientController::class, 'search'])->name('api.patients.search');
     Route::get('/doctors/available', [DoctorController::class, 'available'])->name('api.doctors.available');
@@ -303,3 +304,9 @@ Route::prefix('api')->middleware(['auth:sanctum'])->group(function () {
     })->name('api.notifications.unread');
 });
 Auth::routes();
+
+
+//mes routes de test par ici
+Route::get('/espace', function () {
+    return view('patients.espace');
+});
