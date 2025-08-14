@@ -42,7 +42,8 @@
                                 <span>Suivez-nous :</span>
                                 <ul>
                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="https://www.linkedin.com/company/kw-legal-technologie"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/company/kw-legal-technologie"><i
+                                                class="fa-brands fa-linkedin-in"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
                                 </ul>
